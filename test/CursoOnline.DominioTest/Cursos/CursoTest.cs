@@ -17,7 +17,7 @@ namespace CursoOnline.DominioTest.Cursos
             {
                 Nome = "Engenharia da Computação",
                 CargaHoraria = (double) 800,
-                PublicoAlvo = "Estudante",
+                PublicoAlvo = PublicoAlvo.Estudante,
                 Valor = (double) 895
             };
 
@@ -26,14 +26,22 @@ namespace CursoOnline.DominioTest.Cursos
             objetoEsperado.ToExpectedObject().ShouldMatch(curso);
         }
 
+        public enum PublicoAlvo
+        {
+            Estudante, 
+            Universitário, 
+            Empregado,
+            Empreendedor
+        }
+
         public class Curso
         {
             public string Nome { get; private set; }
             public double CargaHoraria { get; private set; }
-            public string PublicoAlvo { get; private set; }
+            public PublicoAlvo PublicoAlvo { get; private set; }
             public double Valor { get; private set; }
 
-            public Curso(string nome, double cargaHoraria, string publicoAlvo, double valor)
+            public Curso(string nome, double cargaHoraria, PublicoAlvo publicoAlvo, double valor)
             {
                 Nome = nome;
                 CargaHoraria = cargaHoraria;

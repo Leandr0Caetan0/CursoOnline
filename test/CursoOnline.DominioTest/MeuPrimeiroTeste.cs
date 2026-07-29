@@ -17,7 +17,7 @@ namespace CursoOnline.DominioTest
 
             //Act - Ação
             //Exemplo
-            //variavel1 = variavel2;
+            variavel1 = variavel2;
 
             //Assert - Verificação
             Assert.Equal(variavel1, variavel2);

@@ -21,7 +21,7 @@ namespace CursoOnline.DominioTest.Cursos
                 Valor = (double) 895
             };
 
-            var curso = new Curso(objetoEsperado.Nome, objetoEsperado.CargaHoraria, objetoEsperado.PublicoAlvo, objetoEsperado.Valor);
+            var curso = new Curso(string.Empty, objetoEsperado.CargaHoraria, objetoEsperado.PublicoAlvo, objetoEsperado.Valor);
 
             objetoEsperado.ToExpectedObject().ShouldMatch(curso);
         }

@@ -13,17 +13,52 @@ namespace CursoOnline.DominioTest.Cursos
         [Fact]
         public void DeveCriarCurso()
         {
+            //Arrange
             var objetoEsperado = new
             {
                 Nome = "Engenharia da Computação",
-                CargaHoraria = (double) 800,
+                CargaHoraria = (double)800,
                 PublicoAlvo = PublicoAlvo.Estudante,
-                Valor = (double) 895
+                Valor = (double)895
             };
 
-            var curso = new Curso(string.Empty, objetoEsperado.CargaHoraria, objetoEsperado.PublicoAlvo, objetoEsperado.Valor);
+            //Act
+            var curso = new Curso(objetoEsperado.Nome, objetoEsperado.CargaHoraria, objetoEsperado.PublicoAlvo, objetoEsperado.Valor);
 
+            //Assert
             objetoEsperado.ToExpectedObject().ShouldMatch(curso);
+        }
+
+        [Fact]
+        public void NaoDeveCriarCursoComNomeVazio()
+        {
+            //Arrange
+            var objetoEsperado = new
+            {
+                Nome = "Engenharia da Computação",
+                CargaHoraria = (double)800,
+                PublicoAlvo = PublicoAlvo.Estudante,
+                Valor = (double)895
+            };
+
+            //Act e Assert
+            Assert.Throws<ArgumentException>(() => new Curso(string.Empty, objetoEsperado.CargaHoraria, objetoEsperado.PublicoAlvo, objetoEsperado.Valor));
+        }
+
+        [Fact]
+        public void NaoDeveCriarCursoComNomeNulo()
+        {
+            //Arrange
+            var objetoEsperado = new
+            {
+                Nome = "Engenharia da Computação",
+                CargaHoraria = (double)800,
+                PublicoAlvo = PublicoAlvo.Estudante,
+                Valor = (double)895
+            };
+
+            //Act e Assert
+            Assert.Throws<ArgumentException>(() => new Curso(null, objetoEsperado.CargaHoraria, objetoEsperado.PublicoAlvo, objetoEsperado.Valor));
         }
 
         public enum PublicoAlvo
@@ -43,6 +78,16 @@ namespace CursoOnline.DominioTest.Cursos
 
             public Curso(string nome, double cargaHoraria, PublicoAlvo publicoAlvo, double valor)
             {
+                if (nome == string.Empty)
+                {
+                    throw new ArgumentException();
+                }
+
+                if (nome == null)
+                {
+                    throw new ArgumentException();
+                }
+
                 Nome = nome;
                 CargaHoraria = cargaHoraria;
                 PublicoAlvo = publicoAlvo;
